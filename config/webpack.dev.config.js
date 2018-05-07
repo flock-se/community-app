@@ -24,7 +24,19 @@ module.exports = {
     },
     devServer: {
         contentBase: parentDir,
-        historyApiFallback: true
+        historyApiFallback: true,
+        proxy: {
+            "/api": {
+                target: "http://community-dot-flock-61206.appspot.com",
+                pathRewrite: {"^/api" : ""},
+                changeOrigin: true
+            }, 
+            "/login": {
+                target: "http://community-dot-flock-61206.appspot.com",
+                pathRewrite: {"^/login" : ""},
+                changeOrigin: true
+            }
+        }
     }, 
     resolve: {
   		extensions: ['.js', '.jsx']
