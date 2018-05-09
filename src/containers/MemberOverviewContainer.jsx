@@ -10,7 +10,7 @@ export default class MemberOverviewContainer extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/members')
+    fetch('/api/members', { credentials: 'include' })
       .then(result => result.json())
       .then((data) => {
         this.setState({ memberData: data });
