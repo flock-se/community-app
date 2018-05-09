@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 
+var rootDir = path.join(__dirname, '../');
 var parentDir = path.join(__dirname, '../src/');
 
 module.exports = {
@@ -19,7 +20,7 @@ module.exports = {
     ]
   },
   output: {
-    path: parentDir + '/dist',
+    path: rootDir + '/dist',
     filename: 'bundle.js'
   },
   devServer: {

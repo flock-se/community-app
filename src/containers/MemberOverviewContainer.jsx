@@ -5,7 +5,8 @@ export default class MemberOverviewContainer extends React.Component {
   constructor() {
     super();
     this.state = {
-      memberData: [],
+      memberData: [
+      ],
     };
   }
 
