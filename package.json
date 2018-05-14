@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "./node_modules/.bin/webpack-dev-server --config ./config/webpack.dev.config.js --open",
+    "dev": "./node_modules/.bin/webpack-dev-server --config ./config/webpack.dev.config.js --open='google chrome'",
     "build": "./node_modules/.bin/webpack --config ./config/webpack.dev.config.js"
   },
   "author": "",
