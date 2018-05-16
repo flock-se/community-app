@@ -28,14 +28,17 @@ module.exports = {
     contentBase: parentDir,
     historyApiFallback: true,
     proxy: {
-      "/api": {
+      "/api/**": {
         target: "http://localhost:8080",
-        pathRewrite: {"^/api": ""},
         changeOrigin: true,
       },
       "/login": {
         target: "http://localhost:8080",
-        pathRewrite: {"^/login": ""},
+        changeOrigin: true,
+        xfwd: true
+      },
+      "/oauth2": {
+        target: "http://localhost:8080",
         changeOrigin: true,
         xfwd: true
       }
