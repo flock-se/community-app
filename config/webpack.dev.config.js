@@ -9,14 +9,15 @@ module.exports = {
     path.join(parentDir, 'index.jsx')
   ],
   module: {
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      loader: ['babel-loader', 'eslint-loader']
-    }, {
-      test: /\.(s*)css$/,
-      loaders: ['style-loader', 'css-loader', 'sass-loader']
-    }
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader', 'eslint-loader']
+      }, {
+        test: /\.(s*)css$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      }
     ]
   },
   output: {
