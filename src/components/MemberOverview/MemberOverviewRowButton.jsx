@@ -75,6 +75,9 @@ export default class MemberOverviewRowButton extends React.Component {
     const fields = [
       { key: 'id', label: 'ID', editable: false },
       { key: 'name', label: 'Name', editable: true },
+      { key: 'street', label: 'Street', editable: true },
+      { key: 'houseNumber', label: 'House number', editable: true },
+      { key: 'email', label: 'Email', editable: true },
       { key: 'status', label: 'Status', editable: true },
     ];
 

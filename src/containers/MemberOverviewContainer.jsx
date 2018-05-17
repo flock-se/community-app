@@ -1,5 +1,6 @@
 import React from 'react';
 import MemberOverview from '../components/MemberOverview/MemberOverview';
+import { getMembers, deleteMember, updateMember } from '../actions/member';
 
 export default class MemberOverviewContainer extends React.Component {
   constructor() {
@@ -11,11 +12,7 @@ export default class MemberOverviewContainer extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/members', { credentials: 'include' })
-      .then(result => result.json())
-      .then((data) => {
-        this.setState({ memberData: data });
-      });
+    getMembers(data => this.setState({ memberData: data }));
   }
 
   handleAction = (action, memberData) => {
@@ -27,15 +24,16 @@ export default class MemberOverviewContainer extends React.Component {
   }
 
   handleDelete = (memberId) => {
-    this.setState({ memberData: this.state.memberData.filter(item => memberId !== item.id) });
+    deleteMember(memberId, this.setState({ memberData: this.state.memberData.filter(item => memberId !== item.id) }));
   }
-  handleSave = (editedMember) => {
-    const data = this.state.memberData.map((item) => {
-      const result = item.id === editedMember.id ? editedMember.data : item;
-      return result;
-    });
 
-    this.setState({ memberData: data });
+  handleSave = (editedMember) => {
+    updateMember(editedMember.data, data => this.setState({
+      memberData: this.state.memberData.map((item) => {
+        const result = item.id === data.id ? data : item;
+        return result;
+      }),
+    }));
   }
 
   render() {

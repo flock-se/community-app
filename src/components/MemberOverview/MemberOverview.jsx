@@ -7,7 +7,15 @@ import {
   TableHeaderColumn,
   TableRow,
 } from 'material-ui/Table';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import MemberOverviewRow from './MemberOverviewRow';
+
+const positionFloatingActionButton = {
+  position: 'fixed',
+  right: '50px',
+  bottom: '50px',
+};
 
 const MemberOverview = props => (
   <div>
@@ -24,6 +32,9 @@ const MemberOverview = props => (
         {props.memberData.map(m => <MemberOverviewRow key={m.id} data={m} handleAction={props.handleAction}/>)}
       </TableBody>
     </Table>
+    <FloatingActionButton style={positionFloatingActionButton} secondary={true}>
+      <ContentAdd/>
+    </FloatingActionButton>
   </div>
 );
 
