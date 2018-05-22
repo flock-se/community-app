@@ -1,6 +1,15 @@
 import React from 'react';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import MemberOverview from '../components/MemberOverview/MemberOverview';
-import { getMembers, deleteMember, updateMember } from '../actions/member';
+import { getMembers, deleteMember, updateMember, createMember } from '../actions/member';
+import MemberDialogContainer from './MemberDialogContainer';
+
+const positionFloatingActionButton = {
+  position: 'fixed',
+  right: '50px',
+  bottom: '50px',
+};
 
 export default class MemberOverviewContainer extends React.Component {
   constructor() {
@@ -18,6 +27,8 @@ export default class MemberOverviewContainer extends React.Component {
   handleAction = (action, memberData) => {
     if (action === 'save') {
       this.handleSave(memberData);
+    } else if (action === 'create') {
+      this.handleCreate(memberData);
     } else if (action === 'delete') {
       this.handleDelete(memberData.id);
     }
@@ -36,9 +47,22 @@ export default class MemberOverviewContainer extends React.Component {
     }));
   }
 
+  handleCreate = (editedMember) => {
+    createMember(editedMember.data, data => this.setState({
+      memberData: [...this.state.memberData, data],
+    }));
+  }
+
   render() {
     return (
-      <MemberOverview memberData={this.state.memberData} handleAction={this.handleAction}/>
+      <div>
+        <MemberOverview memberData={this.state.memberData} handleAction={this.handleAction}/>
+        <MemberDialogContainer handleAction={this.handleAction} data={{}} create={true}>
+          <FloatingActionButton style={positionFloatingActionButton} secondary={true}>
+            <ContentAdd/>
+          </FloatingActionButton>
+      </MemberDialogContainer>
+    </div>
     );
   }
 }

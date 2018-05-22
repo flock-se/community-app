@@ -4,7 +4,8 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import MemberOverviewRowButton from './MemberOverviewRowButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import MemberDialogContainer from '../../containers/MemberDialogContainer';
 
 const MemberOverviewRow = props => (
   <TableRow>
@@ -12,7 +13,9 @@ const MemberOverviewRow = props => (
     <TableRowColumn>{props.data.name}</TableRowColumn>
     <TableRowColumn>{props.data.status}</TableRowColumn>
     <TableRowColumn>
-      <MemberOverviewRowButton data={props.data} handleAction={props.handleAction}/>
+      <MemberDialogContainer data={props.data} handleAction={props.handleAction}>
+        <RaisedButton label="Open" primary={true}/>
+      </MemberDialogContainer>
     </TableRowColumn>
   </TableRow>
 );

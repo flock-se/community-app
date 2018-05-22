@@ -19,6 +19,21 @@ const deleteMember = (memberId, callback) => {
     .catch(error => console.log(error));
 };
 
+const createMember = (editedMemberData, callback) => {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(editedMemberData),
+    credentials: 'include',
+    headers: { 'content-type': 'application/json' },
+  };
+
+  return fetch(`${memberUrl}`, options)
+    .then(handleErrors)
+    .then(response => response.json())
+    .then(callback)
+    .catch(error => console.log(error));
+};
+
 const updateMember = (editedMemberData, callback) => {
   const options = {
     method: 'PUT',
@@ -34,4 +49,4 @@ const updateMember = (editedMemberData, callback) => {
     .catch(error => console.log(error));
 };
 
-export { getMembers, deleteMember, updateMember };
+export { getMembers, deleteMember, updateMember, createMember };

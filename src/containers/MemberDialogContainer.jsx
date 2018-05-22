@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Table, TableBody, TableRow, TableRowColumn } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 
-export default class MemberOverviewRowButton extends React.Component {
+export default class MemberDialogContainer extends React.Component {
   constructor(props) {
     super();
     this.state = {
@@ -42,30 +42,18 @@ export default class MemberOverviewRowButton extends React.Component {
     };
 
     let actions = null;
-    if (this.state.editable) {
+    if (this.props.create) {
       actions = [
-        <RaisedButton
-          label="Cancel"
-          style={style}
-          onClick={this.handleClose}
-          key={0}
-        />,
-        <RaisedButton
-        label="Delete"
-        primary={true}
-        style={style}
-        onClick={() => this.handleAction('delete')}
-        key={1}
-        />,
-        <RaisedButton
-        label="Save"
-        primary={true}
-        style={style}
-        onClick={() => this.handleAction('save')}
-        key={2}
-        />,
+        <RaisedButton label="Cancel" style={style} key={1} onClick={this.handleClose} />,
+        <RaisedButton label="Save" primary={true} style={style} onClick={() => this.handleAction('create')} key={2}/>,
       ];
-    } else {
+    } else if (this.state.editable) {
+      actions = [
+        <RaisedButton label="Cancel" style={style} onClick={this.handleClose} key={0}/>,
+        <RaisedButton label="Delete" primary={true} style={style} onClick={() => this.handleAction('delete')} key={1}/>,
+        <RaisedButton label="Save" primary={true} style={style} onClick={() => this.handleAction('save')} key={2}/>,
+      ];
+    } else if (!this.state.editable) {
       actions = [
         <RaisedButton label="Edit" style={style} key={3} primary={true} onClick={this.handleEdit}/>,
         <RaisedButton label="Close" style={style} key={4} onClick={this.handleClose}/>,
@@ -73,7 +61,6 @@ export default class MemberOverviewRowButton extends React.Component {
     }
 
     const fields = [
-      { key: 'id', label: 'ID', editable: false },
       { key: 'name', label: 'Name', editable: true },
       { key: 'street', label: 'Street', editable: true },
       { key: 'houseNumber', label: 'House number', editable: true },
@@ -81,9 +68,13 @@ export default class MemberOverviewRowButton extends React.Component {
       { key: 'status', label: 'Status', editable: true },
     ];
 
+    if (!this.props.create) {
+      fields.unshift({ key: 'id', label: 'ID', editable: false });
+    }
+
     const tableRows = fields.map((field, index) => {
       let value = this.props.data[field.key];
-      if (this.state.editable && field.editable) {
+      if ((this.state.editable && field.editable) || this.props.create) {
         value = <TextField id={field.key} defaultValue={value} onChange={this.handleChange}></TextField>;
       }
       return (
@@ -95,7 +86,7 @@ export default class MemberOverviewRowButton extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="Open" primary={true} onClick={this.handleOpen} />
+        {React.cloneElement(this.props.children, { onClick: this.handleOpen })}
         <Dialog
           title="Member Details"
           actions={actions}
@@ -114,9 +105,11 @@ export default class MemberOverviewRowButton extends React.Component {
   }
 }
 
-MemberOverviewRowButton.propTypes = {
+MemberDialogContainer.propTypes = {
   data: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.number,
   }),
   handleAction: PropTypes.func,
+  children: PropTypes.object,
+  create: PropTypes.bool,
 };
