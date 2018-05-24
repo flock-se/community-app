@@ -65,11 +65,11 @@ export default class MemberDialogContainer extends React.Component {
       { key: 'street', label: 'Street', editable: true },
       { key: 'houseNumber', label: 'House number', editable: true },
       { key: 'email', label: 'Email', editable: true },
-      { key: 'status', label: 'Status', editable: true },
     ];
 
     if (!this.props.create) {
       fields.unshift({ key: 'id', label: 'ID', editable: false });
+      fields.push({ key: 'status', label: 'Status', editable: true });
     }
 
     const tableRows = fields.map((field, index) => {
