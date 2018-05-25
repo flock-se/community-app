@@ -5,7 +5,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
-import MemberDialogContainer from '../../containers/MemberDialogContainer';
+import MemberDialogContainer from '../../../containers/Member/DialogContainer';
 
 const MemberOverviewRow = props => (
   <TableRow>

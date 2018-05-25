@@ -1,9 +1,9 @@
 import React from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import MemberOverview from '../components/MemberOverview/MemberOverview';
-import { getMembers, deleteMember, updateMember, createMember } from '../actions/member';
-import MemberDialogContainer from './MemberDialogContainer';
+import MemberOverview from '../../components/Member/Overview';
+import { getMembers, deleteMember, updateMember, createMember } from '../../actions/member';
+import MemberDialogContainer from './DialogContainer';
 
 const positionFloatingActionButton = {
   position: 'fixed',
