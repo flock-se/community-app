@@ -25,33 +25,31 @@ export default class MemberOverviewContainer extends React.Component {
   }
 
   handleAction = (action, memberData) => {
+    let fAction;
     if (action === 'save') {
-      this.handleSave(memberData);
+      fAction = this.handleSave(memberData);
     } else if (action === 'create') {
-      this.handleCreate(memberData);
+      fAction = this.handleCreate(memberData);
     } else if (action === 'delete') {
-      this.handleDelete(memberData.id);
+      fAction = this.handleDelete(memberData.id);
     }
+    return fAction;
   }
 
-  handleDelete = (memberId) => {
-    deleteMember(memberId, this.setState({ memberData: this.state.memberData.filter(item => memberId !== item.id) }));
-  }
+  handleSave = editedMember => updateMember(editedMember.data, data => this.setState({
+    memberData: this.state.memberData.map((item) => {
+      const result = item.id === data.id ? data : item;
+      return result;
+    }),
+  }));
 
-  handleSave = (editedMember) => {
-    updateMember(editedMember.data, data => this.setState({
-      memberData: this.state.memberData.map((item) => {
-        const result = item.id === data.id ? data : item;
-        return result;
-      }),
-    }));
-  }
+  handleCreate = editedMember => createMember(editedMember.data, data => this.setState({
+    memberData: [...this.state.memberData, data],
+  }));
 
-  handleCreate = (editedMember) => {
-    createMember(editedMember.data, data => this.setState({
-      memberData: [...this.state.memberData, data],
-    }));
-  }
+  handleDelete = memberId => deleteMember(memberId, () => this.setState({
+    memberData: this.state.memberData.filter(item => memberId !== item.id),
+  }));
 
   render() {
     return (

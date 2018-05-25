@@ -24,8 +24,8 @@ export default class MemberDialogContainer extends React.Component {
   };
 
   handleAction = (action) => {
-    this.props.handleAction(action, { id: this.props.data.id, data: this.editedMemberData });
-    this.handleClose();
+    const data = { id: this.props.data.id, data: this.editedMemberData };
+    this.props.handleAction(action, data).then(() => this.handleClose());
   }
 
   handleEdit = () => {
