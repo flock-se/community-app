@@ -8,7 +8,7 @@ import {
   TableRow,
 } from 'material-ui/Table';
 
-import MemberOverviewRow from './Overview/Row';
+import MemberOverviewRow from './row';
 
 const MemberOverview = props => (
   <div>

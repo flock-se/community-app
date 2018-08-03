@@ -68,7 +68,7 @@ export default class MemberDialogContainer extends React.Component {
       { key: 'houseNumber', label: 'House number', editable: true },
       { key: 'houseNumberExtension', label: 'House number extension', editable: true },
       { key: 'postalCode', label: 'Postal code', editable: true },
-      { key: 'place', label: 'Place', editable: true },
+      { key: 'city', label: 'City', editable: true },
       { key: 'phoneNumber', label: 'Phone number', editable: true },
       { key: 'email', label: 'Email', editable: true },
     ];
