@@ -10,7 +10,7 @@ import MemberDialogContainer from '../../../containers/Member/DialogContainer';
 const MemberOverviewRow = props => (
   <TableRow>
     <TableRowColumn>{props.data.id}</TableRowColumn>
-    <TableRowColumn>{props.data.name}</TableRowColumn>
+    <TableRowColumn>{props.data.firstName} {props.data.infix} {props.data.surName} </TableRowColumn>
     <TableRowColumn>{props.data.status}</TableRowColumn>
     <TableRowColumn>
       <MemberDialogContainer data={props.data} handleAction={props.handleAction}>
@@ -23,7 +23,9 @@ const MemberOverviewRow = props => (
 MemberOverviewRow.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
+    firstName: PropTypes.string.isRequired,
+    infix: PropTypes.string,
+    surName: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }),
   handleAction: PropTypes.func,

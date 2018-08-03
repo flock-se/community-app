@@ -61,9 +61,15 @@ export default class MemberDialogContainer extends React.Component {
     }
 
     const fields = [
-      { key: 'name', label: 'Name', editable: true },
-      { key: 'street', label: 'Street', editable: true },
+      { key: 'firstName', label: 'First name', editable: true },
+      { key: 'infix', label: 'Infix', editable: true },
+      { key: 'surName', label: 'Surname', editable: true },
+      { key: 'street', label: 'Street name', editable: true },
       { key: 'houseNumber', label: 'House number', editable: true },
+      { key: 'houseNumberExtension', label: 'House number extension', editable: true },
+      { key: 'postalCode', label: 'Postal code', editable: true },
+      { key: 'place', label: 'Place', editable: true },
+      { key: 'phoneNumber', label: 'Phone number', editable: true },
       { key: 'email', label: 'Email', editable: true },
     ];
 
